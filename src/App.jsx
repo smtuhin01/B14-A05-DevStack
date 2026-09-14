@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import './App.css'
 import bannerStack from '../assets/banner-stack.png'
 import logoText from '../assets/logo-text.png'
@@ -8,12 +10,14 @@ function App() {
   const [technologies, setTechnologies] = useState([])
   const [loading, setLoading] = useState(true)
   const [stack, setStack] = useState([])
+
   useEffect(() => {
     fetch('technologies.json')
       .then((response) => {
         if (!response.ok) {
           throw new Error('Could not load technology data')
         }
+
         return response.json()
       })
       .then((data) => {
@@ -27,18 +31,22 @@ function App() {
   }, [])
   function addToStack(technology) {
     const alreadyAdded = stack.find((item) => item.id === technology.id)
-
     if (alreadyAdded) {
+      toast.warning(technology.name + ' is already in your stack.')
       return
     }
     setStack([...stack, technology])
+    toast.success(technology.name + ' added to your stack.')
   }
   function removeFromStack(id) {
+    const selectedTechnology = stack.find((item) => item.id === id)
     const updatedStack = stack.filter((item) => item.id !== id)
     setStack(updatedStack)
+    toast.info(selectedTechnology.name + ' removed from your stack.')
   }
   function removeAllStack() {
     setStack([])
+    toast.info('All technologies were removed from your stack.')
   }
   return (
     <div>
@@ -74,8 +82,13 @@ function App() {
             </p>
 
             <div className="hero-buttons">
-              <button className="explore-button">Explore Technologies </button>
-              <button className="learn-button">Learn More</button>
+              <button className="explore-button">
+                Explore Technologies
+              </button>
+
+              <button className="learn-button">
+                Learn More
+              </button>
             </div>
           </div>
           <div className="hero-image">
@@ -114,6 +127,51 @@ function App() {
           )}
         </section>
       </main>
+      <footer className="footer" id="contact">
+        <div className="footer-container">
+          <div className="footer-brand">
+            <img src={logoText} alt="Dev Stack" />
+            <p>
+              Curated tools, technologies, and resources for developers
+              building modern software.
+            </p>
+            <div className="social-links">
+              <a href="https://github.com" target="_blank">GitHub</a>
+              <a href="https://x.com" target="_blank">Twitter</a>
+              <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+            </div>
+          </div>
+          <div className="footer-links">
+            <h4>Product</h4>
+            <a href="#home">Home</a>
+            <a href="#technologies">Technologies</a>
+            <a href="#projects">Projects</a>
+          </div>
+          <div className="footer-links">
+            <h4>Company</h4>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+            <a href="#careers">Careers</a>
+          </div>
+          <div className="footer-links">
+            <h4>Legal</h4>
+            <a href="#privacy">Privacy Policy</a>
+            <a href="#terms">Terms of Service</a>
+          </div>
+        </div>
+        <div className="footer-bottom">
+          <p>© 2026 Dev Stack. All rights reserved.</p>
+          <div>
+            <a href="#privacy">Privacy</a>
+            <a href="#terms">Terms</a>
+          </div>
+        </div>
+      </footer>
+      <ToastContainer
+        position="top-right"
+        autoClose={2500}
+        theme="light"
+      />
     </div>
   )
 }
