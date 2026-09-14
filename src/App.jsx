@@ -23,11 +23,9 @@ function App() {
       </header>
       <main>
         <section id="home">
-          
         </section>
       </main>
     </div>
   )
 }
-
 export default App
