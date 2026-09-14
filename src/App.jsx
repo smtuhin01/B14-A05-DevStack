@@ -4,20 +4,20 @@ import 'react-toastify/dist/ReactToastify.css'
 import './App.css'
 import bannerStack from '../assets/banner-stack.png'
 import logoText from '../assets/logo-text.png'
+import hamburgerIcon from '../ui/hamburger.png'
 import TechnologyCard from './components/TechnologyCard'
 import StackSidebar from './components/StackSidebar'
 function App() {
   const [technologies, setTechnologies] = useState([])
   const [loading, setLoading] = useState(true)
   const [stack, setStack] = useState([])
-
+  const [menuOpen, setMenuOpen] = useState(false)
   useEffect(() => {
     fetch('technologies.json')
       .then((response) => {
         if (!response.ok) {
           throw new Error('Could not load technology data')
         }
-
         return response.json()
       })
       .then((data) => {
@@ -52,10 +52,12 @@ function App() {
     <div>
       <header className="navbar">
         <div className="navbar-container">
-          <a className="brand" href="#home">
-            <img src={logoText} alt="Dev Stack" />
-          </a>
-          <nav className="nav-links">
+          <button
+            className="menu-button"onClick={() => setMenuOpen(!menuOpen)}>       
+            <img src={hamburgerIcon} alt="Menu" />
+          </button>
+          <a className="brand" href="#home"> <img src={logoText} alt="Dev Stack"/></a>
+          <nav className={menuOpen ? 'nav-links nav-open' : 'nav-links'}>
             <a href="#home">Home</a>
             <a href="#technologies">Technologies</a>
             <a href="#projects">Projects</a>
@@ -75,17 +77,10 @@ function App() {
               Build Your Ideal
               <span>Development Stack</span>
             </h1>
-            <p>
-              Explore frontend, backend, database, and tooling options.
-              Compare them side by side and build a stack that fits your
-              next project.
-            </p>
-
+      <p>Explore frontend, backend, database, and tooling options.Compare them side by side and build a stack that fits your
+              next project.</p>
             <div className="hero-buttons">
-              <button className="explore-button">
-                Explore Technologies
-              </button>
-
+              <button className="explore-button">Explore Technologies</button>
               <button className="learn-button">
                 Learn More
               </button>
@@ -118,11 +113,7 @@ function App() {
                   />
                 ))}
               </div>
-              <StackSidebar
-                stack={stack}
-                onRemove={removeFromStack}
-                onRemoveAll={removeAllStack}
-              />
+              <StackSidebar stack={stack} onRemove={removeFromStack} onRemoveAll={removeAllStack}/>          
             </div>
           )}
         </section>
@@ -131,10 +122,8 @@ function App() {
         <div className="footer-container">
           <div className="footer-brand">
             <img src={logoText} alt="Dev Stack" />
-            <p>
-              Curated tools, technologies, and resources for developers
-              building modern software.
-            </p>
+            <p>Curated tools, technologies, and resources for developers building modern software.</p>
+ 
             <div className="social-links">
               <a href="https://github.com" target="_blank">GitHub</a>
               <a href="https://x.com" target="_blank">Twitter</a>
