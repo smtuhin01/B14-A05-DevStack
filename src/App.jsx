@@ -1,7 +1,28 @@
-import bannerStack from '../assets/banner-stack.png'
+import {useEffect, useState} from 'react'
 import './App.css'
+import bannerStack from '../assets/banner-stack.png'
 import logoText from '../assets/logo-text.png'
+import TechnologyCard from './components/TechnologyCard'
 function App() {
+  const [technologies, setTechnologies] = useState([])
+const [loading, setLoading] = useState(true)
+useEffect(() => {
+  fetch('technologies.json')
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Could not load technology data')
+      }
+      return response.json()
+    })
+    .then((data) => {
+      setTechnologies(data)
+      setLoading(false)
+    })
+    .catch((error) => {
+      console.log(error)
+      setLoading(false)
+    })
+}, [])
   return (
     <div>
       <header className="navbar">
@@ -29,13 +50,11 @@ function App() {
         Build Your Ideal
         <span>Development Stack</span>
       </h1>
-
       <p>
         Explore frontend, backend, database, and tooling options.
         Compare them side by side and build a stack that fits your
         next project.
       </p>
-
       <div className="hero-buttons">
         <button className="explore-button">
           Explore Technologies
@@ -46,11 +65,34 @@ function App() {
         </button>
       </div>
     </div>
-
     <div className="hero-image">
       <img src={bannerStack} alt="Development stack illustration" />
     </div>
   </section>
+ <section className="technology-section" id="technologies">
+  <div className="section-heading">
+    <h2>
+      Explore the <span>Technologies</span>
+    </h2>
+
+    <p>
+      Pick one technology per category to build your ideal stack.
+    </p>
+  </div>
+
+  {loading ? (
+    <p className="loading-text">Loading technologies...</p>
+  ) : (
+    <div className="technology-grid">
+      {technologies.map((technology) => (
+        <TechnologyCard
+          key={technology.id}
+          technology={technology}
+        />
+      ))}
+    </div>
+  )}
+</section>
 </main>
     </div>
   )
