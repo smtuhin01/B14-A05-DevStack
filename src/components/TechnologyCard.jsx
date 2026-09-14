@@ -4,17 +4,12 @@ function TechnologyCard({ technology, onAdd, isAdded }) {
       <div className="card-top">
         <img
           className="technology-icon" src={technology.icon} alt={technology.name} />
-
         <span className="badge">
           {technology.badge}
         </span>
       </div>
-
       <h3>{technology.name}</h3>
-
       <p className="card-description"> {technology.description}</p>
-      
-
       <div className="card-details">
         <span className="category">
           {technology.category}
