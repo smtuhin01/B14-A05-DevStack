@@ -8,7 +8,6 @@ function StackSidebar({ stack, onRemove, onRemoveAll }) {
       {stack.length === 0 ? (
         <div className="empty-stack">
           <p>Your stack is empty.</p>
-          <span>Add technologies to build your ideal stack.</span>
         </div>
       ) : (
         <div className="stack-list">
