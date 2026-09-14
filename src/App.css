@@ -382,3 +382,48 @@ button {
     grid-template-columns: 1fr;
   }
 }
+.remove-item {
+  margin-left: auto;
+  border: none;
+  background-color: transparent;
+  color: #9aa6b8;
+  font-size: 22px;
+  line-height: 1;
+}
+.remove-item:hover {
+  color: #e83f55;
+}
+.remove-all-button {
+  width: 100%;
+  margin-top: 32px;
+  padding: 9px;
+  border: 1px solid #ffb9b6;
+  border-radius: 6px;
+  background-color: white;
+  color: #ed4f4a;
+  font-size: 12px;
+  font-weight: 700;
+}
+.remove-all-button:disabled {
+  border-color: #e7ebf3;
+  color: #aeb8c6;
+  cursor: not-allowed;
+}
+.technology-card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.technology-card:hover {
+  transform: translateY(-6px);
+  border-color: #d946a7;
+  box-shadow: 0 12px 24px rgba(217, 70, 167, 0.14);
+}
+.selected-card {
+  border-color: #51c98a;
+  background-color: #fcfffd;
+  box-shadow: 0 10px 22px rgba(34, 197, 94, 0.14);
+}
+.selected-card:hover {
+  transform: translateY(-6px);
+  border-color: #26a866;
+  box-shadow: 0 14px 26px rgba(34, 197, 94, 0.2);
+}

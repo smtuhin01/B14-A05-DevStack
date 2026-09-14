@@ -33,6 +33,13 @@ function App() {
     }
     setStack([...stack, technology])
   }
+  function removeFromStack(id) {
+    const updatedStack = stack.filter((item) => item.id !== id)
+    setStack(updatedStack)
+  }
+  function removeAllStack() {
+    setStack([])
+  }
   return (
     <div>
       <header className="navbar">
@@ -65,14 +72,10 @@ function App() {
               Compare them side by side and build a stack that fits your
               next project.
             </p>
-            <div className="hero-buttons">
-              <button className="explore-button">
-                Explore Technologies
-              </button>
 
-              <button className="learn-button">
-                Learn More
-              </button>
+            <div className="hero-buttons">
+              <button className="explore-button">Explore Technologies </button>
+              <button className="learn-button">Learn More</button>
             </div>
           </div>
           <div className="hero-image">
@@ -102,7 +105,11 @@ function App() {
                   />
                 ))}
               </div>
-              <StackSidebar stack={stack} />
+              <StackSidebar
+                stack={stack}
+                onRemove={removeFromStack}
+                onRemoveAll={removeAllStack}
+              />
             </div>
           )}
         </section>

@@ -1,6 +1,6 @@
 function TechnologyCard({ technology, onAdd, isAdded }) {
   return (
-    <div className="technology-card">
+   <div className={isAdded ? 'technology-card selected-card' : 'technology-card'}>
       <div className="card-top">
         <img
           className="technology-icon" src={technology.icon} alt={technology.name} />
