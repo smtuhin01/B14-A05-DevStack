@@ -1,3 +1,4 @@
+import bannerStack from '../assets/banner-stack.png'
 import './App.css'
 import logoText from '../assets/logo-text.png'
 function App() {
@@ -22,9 +23,35 @@ function App() {
         </div>
       </header>
       <main>
-        <section id="home">
-        </section>
-      </main>
+  <section className="hero-section" id="home">
+    <div className="hero-text">
+      <h1>
+        Build Your Ideal
+        <span>Development Stack</span>
+      </h1>
+
+      <p>
+        Explore frontend, backend, database, and tooling options.
+        Compare them side by side and build a stack that fits your
+        next project.
+      </p>
+
+      <div className="hero-buttons">
+        <button className="explore-button">
+          Explore Technologies
+        </button>
+
+        <button className="learn-button">
+          Learn More
+        </button>
+      </div>
+    </div>
+
+    <div className="hero-image">
+      <img src={bannerStack} alt="Development stack illustration" />
+    </div>
+  </section>
+</main>
     </div>
   )
 }
